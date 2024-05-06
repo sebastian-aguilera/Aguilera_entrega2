@@ -35,8 +35,8 @@ class usuario {
 let opcion;
 while (opcion != 0) {
 
-    let opcion = parseInt(prompt(" 1. Alta de usuario\n 2. Baja de Usuarios\n 3. Consulta de los Usuarios\n 4. Modificar datos de Usuarios\n 5. Salir"));
-    if (opcion == 5) {
+    let opcion = parseInt(prompt(" 1. Alta de usuario\n 2. Baja del Primer Usuario\n 3. Baja del Último Usuarios\n 4. Consulta de los Usuarios\n 5. Cantidad de Usuarios registrados\n 6. Salir"));
+    if (opcion == 6) {
         break;
     }
 
@@ -47,19 +47,23 @@ while (opcion != 0) {
             altaUsuario();
             break;
         case 2:
-            alert('Baja de Usuarios');
-            eliminarUsuario();
+            alert('Baja del Primer Usuario');
+            eliminarPrimerUsuario();
+            break;
+        case 3:
+            alert('Baja del Último Usuario');
+            eliminarUltimoUsuario();
             break;
 
-        case 3:
+        case 4:
             alert('Consulta de los Usuarios registrados');
             consultarUsuario();
             break;
-        case 4:
-            alert('Modificación de los Usuarios registrados');
-            modificarUsuario();
-            break;
         case 5:
+            alert('Cantidad de Usuarios registrados');
+            cantidadUsuario();
+            break;
+        case 6:
             break;
 
         default:
@@ -76,20 +80,18 @@ function altaUsuario() {
         console.warn('No ha ingresado ningún valor');
 
     }
-    //  else
-    //   if (typeof nombreNuevoUsuario != "String") {
-    //      console.warn('No ha ingresado un valor de tipo string');
-
+    //  else{
+    // if (typeof nombreNuevoUsuario != "String") {
+    // console.warn('No ha ingresado un valor de tipo string');
 
     //  } 
+    // }
+
     else {
 
         console.log('Nombre de Usuario correcto');
 
     }
-
-
-
 
     const contraseñaNuevoUsuario = prompt('Ingrese Contraseña');
     const caracter = /^(?=.*\d)(?=.*[a-z])(?=.*[^a-zA-Z0-9])(?!.*\s).{6}$/;
@@ -104,7 +106,7 @@ function altaUsuario() {
 
     }
 
-    const nuevoUsuario = new usuario(misUsuarios.length+1, dniNuevoUsuario, nombreNuevoUsuario, contraseñaNuevoUsuario);
+    const nuevoUsuario = new usuario(misUsuarios.length + 1, dniNuevoUsuario, nombreNuevoUsuario, contraseñaNuevoUsuario);
     misUsuarios.push(nuevoUsuario);
     alert("Usuario: " + nombreNuevoUsuario + ", dado de Alta correctamente!!!");
 
@@ -126,33 +128,27 @@ function consultarUsuario() {
 }
 
 
-function eliminarUsuario() {
-    let mostrar = "";
-    let id = parseInt(prompt("Ingrese el DNI del Usuario"));
-    if (id === '') {
-        console.warn('No ha ingresado ningún valor');
-    } else if (id === 0)  {
-        console.warn("DNI incorrecto");
 
-    }else if (misUsuarios.length === 0) {
-        mostrar = "No existen Usuarios";
-    } else {
-        misUsuarios.forEach(el => {
-            mostrar += "DNI: " + el.dni + "\n Nombre: " + el.nombre + "\n Contraseña: " + el.contraseña + "\n"
-            // delete el.dni, el.nombre, el.contraseña;
-            // alert("Usuario dado de Baja correctamente")
-        });
-    }
 
-   
+function eliminarPrimerUsuario() {
 
+    let eliminado = misUsuarios.shift();
+    console.log("Eliminación Exitosa");
+    console.log(misUsuarios);
+}
+
+function eliminarUltimoUsuario() {
+
+    let eliminado = misUsuarios.pop();
+    console.log("Eliminación Exitosa");
+    console.log(misUsuarios);
 }
 
 
-
-
-
-function modificarUsuario() {
+function cantidadUsuario() {
+   
+    console.log(misUsuarios.length); 
+    alert("Cantidad de Usuarios registrados: " + misUsuarios.length);
 
 }
 
